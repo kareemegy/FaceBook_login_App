@@ -1,6 +1,10 @@
 <?php
 
 require_once "config.php";
+if (isset($_SESSION['access_token'])) {
+    header("Location:index.php");
+    exit();
+}
 $redirectURL = "http://localhost/facebook_login_app/fb-callback.php";
 $prmission =  ['email'];
 $loginURL = $helper->getLoginUrl($redirectURL, $prmission);
@@ -26,6 +30,7 @@ $loginURL = $helper->getLoginUrl($redirectURL, $prmission);
                     <input type="email" name="email" placeholder=" Enter your Email" class="form-control"><br>
                     <input type="password" name="password" placeholder="Enter your password" class="form-control"><br>
                     <input type="submit" value="Log In" class="btn btn-danger">
+                    <span> OR </span>
                     <input type="button" onclick="window.location='<?php echo $loginURL ?> ' " value="Log In With facebook" class="btn btn-primary">
                 </form>
             </div>
